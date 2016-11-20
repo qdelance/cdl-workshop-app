@@ -38,7 +38,6 @@ node {
    }   
    stage('manual approve') {
       echo '05'
-      input 'Déploiemen en prod ?'
    }
    stage('deploy') {
       echo '06'
