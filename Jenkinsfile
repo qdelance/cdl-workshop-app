@@ -2,9 +2,8 @@ node {
 
    stage('build & unit tests') {
       echo '01'
-      node('build') {
-        sleep 10
-      }
+      checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/mpailloncy/cdl-workshop-app.git']]])
+
    }
    stage('integration tests') {
       echo '02'
