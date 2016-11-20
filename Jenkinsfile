@@ -2,8 +2,14 @@ node {
 
    stage('build & unit tests') {
       echo '01'
+
       checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/mpailloncy/cdl-workshop-app.git']]])
 
+      if (isUnix()) {
+         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+      } else {
+         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+      }
    }
    stage('integration tests') {
       echo '02'
